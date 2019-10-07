@@ -40,7 +40,18 @@ test_shape = ['1-111111-', '---------', '1----1---', '1--1-----', '----1--1-', '
 
 print('\n'.join(test_shape))
 
-#print(S.get('-'))
+def sign(num):
+    if num < 0:
+        return -1
+    elif num > 0:
+        return 1
+    elif num == 0:
+        return 0
+
+def get_key(d, value):
+    for k, v in d.items():
+        if v == value:
+            return k
 
 #Обучение сети
 for l in X:
@@ -61,4 +72,34 @@ for i in J:
     f.write(str(i) + '\n')
 f.close()
 
+#Распознаваемый образ
+x = [[0] * 9 for i in range(9)]
+for i in range(9):
+    for j in range(9):
+        x[i][j] = S.get(test_shape[i][j])
+print('\nx:')
+for i in range(9):
+    print(x[i], end='\n')
+
+X1 = [[0] * 9 for i in range(9)]
+
 #Распознавание образа
+for k in range(9):
+    #print('\ni:', i)
+    #t = 0
+    for i in range(9):
+        t = 0
+        for j in range(9):
+            #print('\nj:', j)
+            #print('J[i][j]:', J[i][j])
+            #print('x[i][j]:', x[i][j])
+            t += J[i][j] * x[k][i]
+            #print('t:', t)
+        X1[k][i] = sign(t)
+        #print('\nX1[i][j]:', X1[i][j])
+    #print()
+print('\nX1:')
+for i in range(9):
+    for j in range(9):
+        print(get_key(S, X1[i][j]), end='')
+    print()
