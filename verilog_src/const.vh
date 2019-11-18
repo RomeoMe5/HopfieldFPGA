@@ -1,0 +1,3 @@
+`define DEFAULT_SIZE			16		
+`define DEFAULT_N				81
+`define DEFAULT_CLKS_PER_BIT	5208
